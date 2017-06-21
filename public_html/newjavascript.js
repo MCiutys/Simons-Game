@@ -4,11 +4,21 @@
  * and open the template in the editor.
  */
 
-    // Static final variables
+    // Final variables
     const RED = 'R';
     const BLUE = 'B';
     const GREEN = 'G';
     const YELLOW = 'Y';
+    
+    // Final variables for colours
+    const DARK_GREEN = "rgb(0, 51, 0)";
+    const DARK_RED = "rgb(204, 0, 0)";
+    const DARK_BLUE = "rgb(255, 204, 0)";
+    const DARK_YELLOW = "rgb(0, 0, 102)";
+    const LIGHT_GREEN = "rgb(0, 153, 51)";
+    const LIGHT_RED = "rgb(255, 0, 0)";
+    const LIGHT_BLUE = "rgb(255, 255, 0";
+    const LIGHT_YELLOW = "rgb(51, 102, 204)";
     
     function Simon() {
         this.guess = "";
@@ -18,6 +28,7 @@
     
     // Function where all the logic is placed
     Simon.prototype.executeGame = function() {
+        this.startGame();
         do {
             this.addOneColor();
             this.showSequence();
@@ -29,9 +40,9 @@
     // Function for starting the game
     Simon.prototype.startGame = function() {
         // Reset variables
-        guess = "";
-        currentSequence = "";
-        result = 0;
+        this.guess = "";
+        this.currentSequence = "";
+        this.result = 0;
     };
     
     // Function to get one more color to make it harder for player
@@ -56,33 +67,58 @@
                 break; 
         }
     };
+    
+    function setColor(place, color) {
+        var x = document.getElementById(place);
+        x.style.backgroundColor = color;
+    }
+    
+    function setColorBack(place, color) {
+        var x = document.getElementById(place);
+        x.style.backgroundColor = color;
+    }
+    
+    function pressColor() {
+        
+    }
 
     // Function to show flashing buttons
     Simon.prototype.showSequence = function() {
+        console.log(this.currentSequence);
         for (var i = 0; i < this.currentSequence.length; i++) {
-            console.log(this.currentSequence.charAt(i));
+            var place = "";
+            var colorToSet = "";
+            var colorToSetBack = "";
+            alert(place);
             if (this.currentSequence.charAt(i) === 'G') {
-                var color = "rgb(0, 51, 0)";
-                var j = 0;
-                while (j < 3000) {
-                    console.log(j);
-                    document.getElementById("quarter1").style.backgroundColor = "black";
-                    j++;
-                }
-                document.getElementById("quarter1").style.backgroundColor = color;
+                place = "quarter1";
+                colorToSet = LIGHT_GREEN;
+                colorToSetBack = DARK_GREEN;
             } else if (this.currentSequence.charAt(i) === 'R') {
-                document.getElementById("quarter2").style.backgroundColor = "rgb(255, 0, 0)";
-            } else if (this.currentSequence.charAt(i) === 'B') {
-                document.getElementById("quarter3").style.backgroundColor = "rgb(255, 255, 0)";
+                place = "quarter2";
+                colorToSet = LIGHT_RED;
+                colorToSetBack = DARK_RED;
+            } else if (this.currentSequence.charAt(i) === 'Y') {
+                place = "quarter3";
+                colorToSet = LIGHT_BLUE;
+                colorToSetBack = DARK_BLUE;
             } else {
-                document.getElementById("quarter4").style.backgroundColor = "rgb(51, 102, 204)";
+                place = "quarter4";
+                colorToSet = LIGHT_YELLOW;
+                colorToSetBack = DARK_YELLOW;
             }
+            
+            setColor(place, colorToSet);
+            setTimeout(function() { setColorBack(place, colorToSetBack) }, 2000);
         }
     };
 
     // Function to get the guess from a user
     Simon.prototype.getGuess = function() {
-        
+        var counter = 0;
+        while (counter < this.currentSequence.length) {
+            
+        }
     };
 
     // Check whether guess matches actual sequence
