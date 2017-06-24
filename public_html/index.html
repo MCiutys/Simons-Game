@@ -20,6 +20,22 @@ and open the template in the editor.
                 $("#start-button").click(function() {
                     simon.executeGame();
                 });
+                
+                $("#quarter1").click(function() {
+                    simon.pressGreen();
+                });
+                
+                $("#quarter2").click(function() {
+                    simon.pressRed();
+                });
+                
+                $("#quarter3").click(function() {
+                    simon.pressBlue();
+                });
+                
+                $("#quarter4").click(function() {
+                    simon.pressYellow();
+                });
             });
         </script>
         
@@ -31,10 +47,10 @@ and open the template in the editor.
     
     <body style="background-color:#FFFFFF">
     <div id="main-circle">
-        <div class="quarter-circle" id="quarter1"></div>
-        <div class="quarter-circle" id="quarter2"></div>
-        <div class="quarter-circle" id="quarter3"></div>
-        <div class="quarter-circle" id="quarter4"></div>
+        <div class="quarter-circle" id="quarter1" onclick="pressGreen()"></div>
+        <div class="quarter-circle" id="quarter2" onclick="pressRed()"></div>
+        <div class="quarter-circle" id="quarter3" onclick="pressBlue()"></div>
+        <div class="quarter-circle" id="quarter4" onclick="pressYellow()"></div>
 
         <div class="cutout">
            <p class="title">SIMON</p>

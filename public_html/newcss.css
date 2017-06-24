@@ -32,6 +32,7 @@ and open the template in the editor.
 	left: 30px;
 	background-color:rgb(0, 51, 0);
 	border-radius:100% 0 0 0;
+        cursor: pointer;
 }
 
 #quarter2 {
@@ -39,18 +40,21 @@ and open the template in the editor.
 	right:30px;
 	background-color:rgb(204, 0, 0);
 	border-radius:0 100% 0 0 ;
+        cursor: pointer;
 }
 #quarter3 {
 	bottom:30px;
 	left:30px;
 	background-color:rgb(255, 204, 0);
 	border-radius:0 0 0 100%;
+        cursor: pointer;
 }
 #quarter4 {
 	bottom:30px;
 	right:30px;
 	background-color:rgb(0, 0, 102);
 	border-radius:0 0 100% 0 ;
+        cursor: pointer;
 }
 
 .cutout {
