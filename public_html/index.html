@@ -25,6 +25,30 @@ and open the template in the editor.
                     simon.pressGreen();
                 });
                 
+                $("#quarter1").hover(function() {
+                    simon.lightGreen();
+                }, function() {
+                    simon.darkGreen();
+                });
+                
+                $("#quarter2").hover(function() {
+                    simon.lightRed();
+                }, function() {
+                    simon.darkRed();
+                });
+                
+                $("#quarter3").hover(function() {
+                    simon.lightBlue();
+                }, function() {
+                    simon.darkBlue();
+                });
+                
+                $("#quarter4").hover(function() {
+                    simon.lightYellow();
+                }, function() {
+                    simon.darkYellow();
+                });
+                
                 $("#quarter2").click(function() {
                     simon.pressRed();
                 });
@@ -36,6 +60,7 @@ and open the template in the editor.
                 $("#quarter4").click(function() {
                     simon.pressYellow();
                 });
+                
             });
         </script>
         

@@ -69,21 +69,21 @@ and open the template in the editor.
   background: rgb(155, 155, 155);
 }
 
-#quarter1:hover {
-  background-color: rgb(0, 153, 51);
-}
+//#quarter1:hover {
+//  background-color: rgb(0, 153, 51);
+//}
 
-#quarter2:hover {
-  background-color: rgb(255, 0, 0);
-}
+//#quarter2:hover {
+//  background-color: rgb(255, 0, 0);
+//}
 
-#quarter3:hover {
+/*#quarter3:hover {
   background-color: rgb(255, 255, 0);
 }
 
 #quarter4:hover {
   background-color: rgb(51, 102, 204);
-}
+}*/
 
 .title {
   font-family: Sans Serif;
