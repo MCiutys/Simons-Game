@@ -44,16 +44,16 @@ and open the template in the editor.
 }
 #quarter3 {
 	bottom:30px;
-	left:30px;
+	right:30px;
 	background-color:rgb(255, 204, 0);
-	border-radius:0 0 0 100%;
+	border-radius:0 0 100% 0;
         cursor: pointer;
 }
 #quarter4 {
 	bottom:30px;
-	right:30px;
+	left:30px;
 	background-color:rgb(0, 0, 102);
-	border-radius:0 0 100% 0 ;
+	border-radius:0 0 0 100% ;
         cursor: pointer;
 }
 
@@ -69,22 +69,6 @@ and open the template in the editor.
   background: rgb(155, 155, 155);
 }
 
-//#quarter1:hover {
-//  background-color: rgb(0, 153, 51);
-//}
-
-//#quarter2:hover {
-//  background-color: rgb(255, 0, 0);
-//}
-
-/*#quarter3:hover {
-  background-color: rgb(255, 255, 0);
-}
-
-#quarter4:hover {
-  background-color: rgb(51, 102, 204);
-}*/
-
 .title {
   font-family: Sans Serif;
   font-size: 58px;
@@ -95,20 +79,41 @@ and open the template in the editor.
 
 #start-button {
     position: relative;
-    margin-left: 100px;
-    position: relative;
     background-color: red;
     color: black;
     border-radius: 50%;
     font-weight: bold;
 }
 
+#cancel {
+    position: relative;
+    background-color: red;
+    color: black;
+    border-radius: 30%;
+    font-weight: bold;
+}
+
+#accept {
+    position: relative;
+    background-color: green;
+    color: black;
+    border-radius: 30%;
+    font-weight: bold;
+}
+
+#buttons {
+    margin-left: 25px;
+}
+
 #counter {
-    width: 50px;
+    width: 200px;
     height: 50px;
     position: relative;
     background-color: black;
-    font-size: 40px;
+    font-size: 20px;
+    font-family: 'Segment7Standard'; 
+    font-weight: normal; 
+    font-style: italic; 
     color: red;
     margin-top: 15px;
     margin-left: 50px;

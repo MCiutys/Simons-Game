@@ -10,6 +10,7 @@ and open the template in the editor.
         <link rel="stylesheet" href="newcss.css" type="text/css"/>
         <link rel="stylesheet" href="newcss.css" type="text/css">
         <link rel="stylesheet" href="css/bootstrap.min.css" type="text/css"/>
+        <link rel="stylesheet" media="screen" href="https://fontlibrary.org/face/segment7" type="text/css"/>
         <script type="text/javascript" src="js/jquery-3.2.1.js"></script>
         <script type="text/javascript" src="newjavascript.js"></script>
         
@@ -61,6 +62,14 @@ and open the template in the editor.
                     simon.pressYellow();
                 });
                 
+                $("#cancel").click(function() {
+                    simon.cancelGuess();
+                });
+                
+                $("#accept").click(function() {
+                    simon.acceptGuess();
+                });
+                
             });
         </script>
         
@@ -72,15 +81,20 @@ and open the template in the editor.
     
     <body style="background-color:#FFFFFF">
     <div id="main-circle">
-        <div class="quarter-circle" id="quarter1" onclick="pressGreen()"></div>
-        <div class="quarter-circle" id="quarter2" onclick="pressRed()"></div>
-        <div class="quarter-circle" id="quarter3" onclick="pressBlue()"></div>
-        <div class="quarter-circle" id="quarter4" onclick="pressYellow()"></div>
+        <div class="quarter-circle" id="quarter1"
+              onmousedown="mouseDown('quarter1')" onmouseup="mouseUp('quarter1')"></div>
+        <div class="quarter-circle" id="quarter2" onmousedown="mouseDown('quarter2')"></div>
+        <div class="quarter-circle" id="quarter3" onmousedown="mouseDown('quarter3')"></div>
+        <div class="quarter-circle" id="quarter4" onmousedown="mouseDown('quarter4')"></div>
 
         <div class="cutout">
            <p class="title">SIMON</p>
-            <button type="button" class="btn btn-lg" id="start-button">START</button>
-            <div id="counter">0</div>
+           <div id="buttons">
+               <button type="button" class="btn btn-sm" id="cancel" onclick="cancelGuess()">CANCEL</button>
+                <button type="button" class="btn btn-lg" id="start-button">START</button>
+                <button type="button" class="btn btn-sm" id="accept">ACCEPT</button>
+           </div>
+            <div id="counter">Press START to play!</div>
         </div>
     </div>
 </body>

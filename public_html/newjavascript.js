@@ -21,10 +21,18 @@
     const LIGHT_BLUE = "rgb(255, 255, 0";
     const LIGHT_YELLOW = "rgb(51, 102, 204)";
     
+    // Color when pressed
+    const BLACK = "black";
+    
+    // Other const variables
+    const SCORE_TEXT = "Score ";
+    const GUESS_TEXT = "Guess ";
+    
     function Simon() {
         this.guess = "";
         this.currentSequence = "";
         this.result = 0;
+        this.accepted = false;
     }
     
     // Function where all the logic is placed
@@ -36,7 +44,6 @@
         
         function mainLoop() {
             if (self.isMatching()) {
-                console.log(self.result);
                 self.addOneColor();
                 self.showSequence();
                 self.getGuess(function() {
@@ -56,7 +63,13 @@
         this.guess = "";
         this.currentSequence = "";
         this.result = 0;
+        
+        document.getElementById("counter").style.textOverflow = "ellipsis";
+        document.getElementById("counter").style.overflow = "hidden";
+        document.getElementById("counter").style.whiteSpace = "nowrap";
+        
     };
+    
     
     // Function to get one more color to make it harder for player
     Simon.prototype.addOneColor = function() {
@@ -89,6 +102,19 @@
     function setColorBack(place, color) {
         var x = document.getElementById(place);
         x.style.backgroundColor = color;
+    }
+    
+    function mouseDown(place) {
+        document.getElementById(place).style.backgroundColor = BLACK;
+    }
+    
+    function mouseUp(place) {
+        document.getElementById(place).style.backgroundColor = LIGHT_GREEN;
+    }
+    
+    function gameOver(self) {
+        document.getElementById("counter").innerHTML = "Game Over" + "<br>" + "Score " + 
+                    (self.result - 1);
     }
     
     Simon.prototype.pressGreen = function() {        
@@ -138,6 +164,15 @@
     Simon.prototype.pressYellow = function() {
         this.guess += YELLOW;
     };
+    
+    Simon.prototype.cancelGuess = function() {
+        this.guess = this.guess.substring(0, this.guess.length - 1);
+        console.log(this.guess);
+    };
+    
+    Simon.prototype.acceptGuess = function() {
+        this.accepted = true;
+    };
 
     // Function to show flashing buttons
     Simon.prototype.showSequence = function() {
@@ -181,11 +216,13 @@
         loop();
        
        function loop() {
-            if (g.guess.length < g.currentSequence.length) {
-                setTimeout(loop, 0);
-            } else {
+           document.getElementById("counter").innerHTML = SCORE_TEXT +
+                    (g.result - 1) + '<br>' + GUESS_TEXT + g.guess;
+            if (g.accepted === true) {
+                g.accepted = false;
                 setTimeout(callback, 2000);
-                //callback();
+            } else {
+                setTimeout(loop, 0);
             }
        }
     };
@@ -194,11 +231,10 @@
     Simon.prototype.isMatching = function() {
         var match = false;
         if (this.guess === this.currentSequence) {
-            document.getElementById("counter").innerHTML = this.result;
             this.result++;
             match = true;
         } else {
-            console.log("not equal");
+            gameOver(this);
         }
         this.guess = "";
         return match;
