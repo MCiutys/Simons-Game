@@ -58,7 +58,7 @@ and open the template in the editor.
 }
 
 .cutout {
-  width:300px;
+  width:320px;
   height:300px;
   margin: auto;
   border-radius:150px;
@@ -67,14 +67,18 @@ and open the template in the editor.
   top: 300px;
   transform: translateY(-50%);
   background: rgb(155, 155, 155);
+  padding-top: 30px;
 }
 
 .title {
+  width: 62.5%;
   font-family: Sans Serif;
   font-size: 58px;
   font-weight: bold;
   text-align: center;
-  padding-top: 30px;
+  border-color: black;
+  border-style: solid;
+  margin: auto;
 }
 
 #start-button {
@@ -83,6 +87,7 @@ and open the template in the editor.
     color: black;
     border-radius: 50%;
     font-weight: bold;
+    /*margin: auto;*/
 }
 
 #cancel {
@@ -91,6 +96,7 @@ and open the template in the editor.
     color: black;
     border-radius: 30%;
     font-weight: bold;
+    margin-left: 5%;
 }
 
 #accept {
@@ -99,14 +105,18 @@ and open the template in the editor.
     color: black;
     border-radius: 30%;
     font-weight: bold;
+    margin-right: 5%;
 }
 
-#buttons {
-    margin-left: 25px;
+.buttons {
+    border-color: black;
+    border-style: solid;
+    padding-top: 5px;
+    width: 90%;
 }
 
 #counter {
-    width: 200px;
+    width: 62.5%;
     height: 50px;
     position: relative;
     background-color: black;
@@ -115,8 +125,8 @@ and open the template in the editor.
     font-weight: normal; 
     font-style: italic; 
     color: red;
-    margin-top: 15px;
-    margin-left: 50px;
     text-align: center;
     vertical-align: middle;
+    margin: auto;
+    margin-top: 5%;
 }

@@ -33,6 +33,7 @@
         this.currentSequence = "";
         this.result = 0;
         this.accepted = false;
+        this.gameStarted = false;
     }
     
     // Function where all the logic is placed
@@ -63,6 +64,7 @@
         this.guess = "";
         this.currentSequence = "";
         this.result = 0;
+        this.gameStarted = true;
         
         document.getElementById("counter").style.textOverflow = "ellipsis";
         document.getElementById("counter").style.overflow = "hidden";
@@ -166,12 +168,16 @@
     };
     
     Simon.prototype.cancelGuess = function() {
-        this.guess = this.guess.substring(0, this.guess.length - 1);
-        console.log(this.guess);
+        if (this.gameStarted) {
+            this.guess = this.guess.substring(0, this.guess.length - 1);
+            console.log(this.guess);
+        }
     };
     
     Simon.prototype.acceptGuess = function() {
-        this.accepted = true;
+        if (this.gameStarted) {
+            this.accepted = true;
+        }
     };
 
     // Function to show flashing buttons
