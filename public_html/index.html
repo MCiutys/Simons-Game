@@ -17,48 +17,56 @@ and open the template in the editor.
         
         <script type="text/javascript">
             $(document).ready(function(){
+                
+                // Black border
+//                $("black-border").css(["#main-circle", ".quarter-circle", ".cutout"
+//                    , "#start-button", "#cancel", "#accept", "#counter"]);
+//                
+               
+                
                 var simon = new Simon();
                 $("#start-button").click(function() {
                     simon.executeGame();
                 });
                 
-                $("#quarter1").click(function() {
+                $("#green").click(function() {
                     simon.pressGreen();
+                    
                 });
                 
-                $("#quarter1").hover(function() {
+                $("#green").hover(function() {
                     simon.lightGreen();
                 }, function() {
                     simon.darkGreen();
                 });
                 
-                $("#quarter2").hover(function() {
+                $("#red").hover(function() {
                     simon.lightRed();
                 }, function() {
                     simon.darkRed();
                 });
                 
-                $("#quarter3").hover(function() {
+                $("#blue").hover(function() {
                     simon.lightBlue();
                 }, function() {
                     simon.darkBlue();
                 });
                 
-                $("#quarter4").hover(function() {
+                $("#yellow").hover(function() {
                     simon.lightYellow();
                 }, function() {
                     simon.darkYellow();
                 });
                 
-                $("#quarter2").click(function() {
+                $("#red").click(function() {
                     simon.pressRed();
                 });
                 
-                $("#quarter3").click(function() {
+                $("#yellow").click(function() {
                     simon.pressYellow();
                 });
                 
-                $("#quarter4").click(function() {
+                $("#blue").click(function() {
                     simon.pressBlue();
                 });
                 
@@ -70,7 +78,11 @@ and open the template in the editor.
                     simon.acceptGuess();
                 });
                 
-            });
+                
+                $(".quarter-circle, .button").addClass("black-border");
+                $("#main-circle, #counter, #cutout").addClass("black-border");
+                $("div.buttons button").addClass("black-border");
+                            });
         </script>
         
         
@@ -81,21 +93,24 @@ and open the template in the editor.
     
     <body style="background-color:#FFFFFF">
     <div id="main-circle">
-        <div class="quarter-circle" id="quarter1"
-              onmousedown="mouseDown('quarter1')" onmouseup="mouseUp('quarter1')"></div>
-        <div class="quarter-circle" id="quarter2" onmousedown="mouseDown('quarter2')"></div>
-        <div class="quarter-circle" id="quarter3" onmousedown="mouseDown('quarter3')"></div>
-        <div class="quarter-circle" id="quarter4" onmousedown="mouseDown('quarter4')"></div>
+        <div class="quarter-circle" id="green"
+             onmousedown="mouseDown('green')" onmouseup="mouseUp('green')"></div>
+        <div class="quarter-circle" id="red"
+             onmousedown="mouseDown('red')" onmouseup="mouseUp('red')"></div>
+        <div class="quarter-circle" id="yellow"
+             onmousedown="mouseDown('yellow')" onmouseup="mouseUp('yellow')">   </div>
+        <div class="quarter-circle" id="blue"
+             onmousedown="mouseDown('blue')" onmouseup="mouseUp('blue')"></div>
 
-        <div class="cutout">
+        <div id="cutout">
            <p class="title">SIMON</p>
            <div class="buttons">
-               <button type="button" class="btn btn-sm" id="cancel" onclick="cancelGuess()">CANCEL</button>
-                <button type="button" class="btn btn-lg" id="start-button">START</button>
-                <button type="button" class="btn btn-sm" id="accept">ACCEPT</button>
+               <button type="button" class="btn-sm" id="cancel" onclick="cancelGuess()">CANCEL</button>
+                <button type="button" class="btn-lg" id="start-button">START</button>
+                <button type="button" class="btn-sm" id="accept">ACCEPT</button>
            </div>
             <div id="counter">Press START to play!</div>
-        </div>
+        </div>        
     </div>
 </body>
 </html>

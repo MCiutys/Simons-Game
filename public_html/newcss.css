@@ -9,85 +9,89 @@ and open the template in the editor.
 */
 
 #main-circle {
-  width: 600px;
-  height: 600px;
-  -webkit-border-radius: 300px;
-  -moz-border-radius: 300px;
-  border-radius: 300px;
-  background: rgb(155, 155, 155);
-  margin: auto;
-  position: relative;
+    width: 600px;
+    height: 600px;
+    -webkit-border-radius: 300px;
+    -moz-border-radius: 300px;
+    border-radius: 300px;
+    background: rgb(155, 155, 155);
+    margin: auto;
+    position: relative;
+}
+
+.black-border {
+    border: solid;
+    border-color: black;
 }
 
 
 .quarter-circle {
-  position: absolute;
-  width:250px;
-  height:250px;
-  transition:background-color 0.2s ease-in-out;
+    position: absolute;
+    width:250px;
+    height:250px;
+    transition:background-color 0.2s ease-in-out;
 }
 
-#quarter1 {
-	top: 30px;
-	left: 30px;
-	background-color:rgb(0, 51, 0);
-	border-radius:100% 0 0 0;
-        cursor: pointer;
+#green {
+    top: 30px;
+    left: 30px;
+    background-color:rgb(0, 51, 0);
+    border-radius:100% 0 0 0;
+    cursor: pointer; 
 }
 
-#quarter2 {
-	top: 30px;
-	right:30px;
-	background-color:rgb(204, 0, 0);
-	border-radius:0 100% 0 0 ;
-        cursor: pointer;
+#red {
+    top: 30px;
+    right:30px;
+    background-color:rgb(204, 0, 0);
+    border-radius:0 100% 0 0 ;
+    cursor: pointer;
 }
-#quarter3 {
-	bottom:30px;
-	right:30px;
-	background-color:rgb(255, 204, 0);
-	border-radius:0 0 100% 0;
-        cursor: pointer;
-}
-#quarter4 {
-	bottom:30px;
-	left:30px;
-	background-color:rgb(0, 0, 102);
-	border-radius:0 0 0 100% ;
-        cursor: pointer;
+#yellow {
+    bottom:30px;
+    left:30px; 
+    background-color:rgb(255, 204, 0);
+    border-radius:0 0 0 100%;
+    cursor: pointer;
 }
 
-.cutout {
-  width:320px;
-  height:300px;
-  margin: auto;
-  border-radius:150px;
-  border-width: 10px;
-  position: relative;
-  top: 300px;
-  transform: translateY(-50%);
-  background: rgb(155, 155, 155);
-  padding-top: 30px;
+#blue {
+    bottom:30px;
+    right:30px;
+    background-color:rgb(0, 0, 102);
+    border-radius:0 0 100% 0 ;
+    cursor: pointer;
+}
+
+#cutout {
+    width:320px;
+    height:300px;
+    margin: auto;
+    border-radius:150px;
+    /*border-width: 10px;*/
+    position: relative;
+    top: 300px;
+    transform: translateY(-50%);
+    background: rgb(155, 155, 155);
+    padding-top: 30px;
 }
 
 .title {
-  width: 62.5%;
-  font-family: Sans Serif;
-  font-size: 58px;
-  font-weight: bold;
-  text-align: center;
-  border-color: black;
-  border-style: solid;
-  margin: auto;
+    width: 62.5%;
+    font-family: Sans Serif;
+    color: black;
+    font-size: 58px;
+    font-weight: bold;
+    text-align: center;
+    margin: auto;
 }
 
 #start-button {
     position: relative;
-    background-color: red;
+    background-color: yellow;
     color: black;
     border-radius: 50%;
     font-weight: bold;
-    /*margin: auto;*/
 }
 
 #cancel {
@@ -96,7 +100,7 @@ and open the template in the editor.
     color: black;
     border-radius: 30%;
     font-weight: bold;
-    margin-left: 5%;
+    margin-left: 3%;
 }
 
 #accept {
@@ -105,28 +109,27 @@ and open the template in the editor.
     color: black;
     border-radius: 30%;
     font-weight: bold;
-    margin-right: 5%;
+    margin-right: 3%;
 }
 
 .buttons {
-    border-color: black;
-    border-style: solid;
     padding-top: 5px;
     width: 90%;
 }
 
 #counter {
     width: 62.5%;
-    height: 50px;
-    position: relative;
-    background-color: black;
+    height: 30%;
+    background-color: white;
     font-size: 20px;
-    font-family: 'Segment7Standard'; 
+/*    font-family: 'Segment7Standard'; */
+    font-family: 'Courier';
     font-weight: normal; 
     font-style: italic; 
-    color: red;
+    color: black;
     text-align: center;
     vertical-align: middle;
     margin: auto;
     margin-top: 5%;
+    direction: rtl;
 }
