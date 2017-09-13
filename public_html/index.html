@@ -8,7 +8,6 @@ and open the template in the editor.
 <html>
     <head>
         <link rel="stylesheet" href="newcss.css" type="text/css"/>
-        <link rel="stylesheet" href="newcss.css" type="text/css">
         <link rel="stylesheet" href="css/bootstrap.min.css" type="text/css"/>
         <link rel="stylesheet" media="screen" href="https://fontlibrary.org/face/segment7" type="text/css"/>
         <script type="text/javascript" src="js/jquery-3.2.1.js"></script>
@@ -17,70 +16,111 @@ and open the template in the editor.
         
         <script type="text/javascript">
             $(document).ready(function(){
-                
-                // Black border
-//                $("black-border").css(["#main-circle", ".quarter-circle", ".cutout"
-//                    , "#start-button", "#cancel", "#accept", "#counter"]);
-//                
-               
-                
+
                 var simon = new Simon();
-                $("#start-button").click(function() {
+                
+                $("#start-button").mousedown(function() {
+                    simon.buttonFlash("start-button");
                     simon.executeGame();
                 });
                 
+                $("#start-button").mouseup(function() {
+                    simon.buttonBack("start-button");
+                });
+                
                 $("#green").click(function() {
-                    simon.pressGreen();
-                    
-                });
-                
-                $("#green").hover(function() {
-                    simon.lightGreen();
-                }, function() {
-                    simon.darkGreen();
-                });
-                
-                $("#red").hover(function() {
-                    simon.lightRed();
-                }, function() {
-                    simon.darkRed();
-                });
-                
-                $("#blue").hover(function() {
-                    simon.lightBlue();
-                }, function() {
-                    simon.darkBlue();
-                });
-                
-                $("#yellow").hover(function() {
-                    simon.lightYellow();
-                }, function() {
-                    simon.darkYellow();
+                    simon.pressColor(GREEN);
                 });
                 
                 $("#red").click(function() {
-                    simon.pressRed();
+                    simon.pressColor(RED);
                 });
                 
                 $("#yellow").click(function() {
-                    simon.pressYellow();
+                    simon.pressColor(YELLOW);
                 });
                 
                 $("#blue").click(function() {
-                    simon.pressBlue();
+                    simon.pressColor(BLUE);
                 });
                 
-                $("#cancel").click(function() {
+                $("#green").hover(function() {
+                    simon.hoveringOver(GREEN);
+                }, function() {
+                    simon.afterHovering(GREEN);
+                });
+                
+                $("#red").hover(function() {
+                    simon.hoveringOver(RED);
+                }, function() {
+                    simon.afterHovering(RED);
+                });
+                
+                $("#blue").hover(function() {
+                    simon.hoveringOver(BLUE);
+                }, function() {
+                    simon.afterHovering(BLUE);
+                });
+                
+                $("#yellow").hover(function() {
+                    simon.hoveringOver(YELLOW);
+                }, function() {
+                    simon.afterHovering(YELLOW);
+                });
+                
+                $("#red").mousedown(function() {
+                    simon.mouseDown('red');
+                });
+                
+                $("#red").mouseup(function() {
+                    simon.mouseUp('red');
+                });
+                
+                $("#green").mousedown(function() {
+                    simon.mouseDown("green");
+                });
+                
+                $("#green").mouseup(function() {
+                    simon.mouseUp("green");
+                });
+                
+                $("#blue").mousedown(function() {
+                    simon.mouseDown("blue");
+                });
+                
+                $("#blue").mouseup(function() {
+                    simon.mouseUp("blue");
+                });
+                
+                $("#yellow").mousedown(function() {
+                    simon.mouseDown("yellow");
+                });
+                
+                $("#yellow").mouseup(function() {
+                    simon.mouseUp("yellow");
+                });
+                
+                $("#cancel").mousedown(function() {
+                    simon.buttonFlash("cancel");
                     simon.cancelGuess();
                 });
                 
-                $("#accept").click(function() {
+                $("#cancel").mouseup(function() {
+                    simon.buttonBack("cancel");
+                });
+                
+                $("#accept").mousedown(function() {
+                    simon.buttonFlash("accept");
                     simon.acceptGuess();
+                });
+                
+                $("#accept").mouseup(function() {
+                    simon.buttonBack("accept");
                 });
                 
                 
                 $(".quarter-circle, .button").addClass("black-border");
-                $("#main-circle, #counter, #cutout").addClass("black-border");
+                $("#main-circle, #screen, #cutout").addClass("black-border");
                 $("div.buttons button").addClass("black-border");
                             });
         </script>
@@ -93,23 +133,19 @@ and open the template in the editor.
     
     <body style="background-color:#FFFFFF">
     <div id="main-circle">
-        <div class="quarter-circle" id="green"
-             onmousedown="mouseDown('green')" onmouseup="mouseUp('green')"></div>
-        <div class="quarter-circle" id="red"
-             onmousedown="mouseDown('red')" onmouseup="mouseUp('red')"></div>
-        <div class="quarter-circle" id="yellow"
-             onmousedown="mouseDown('yellow')" onmouseup="mouseUp('yellow')">   </div>
-        <div class="quarter-circle" id="blue"
-             onmousedown="mouseDown('blue')" onmouseup="mouseUp('blue')"></div>
+        <div class="quarter-circle" id="green"></div>
+        <div class="quarter-circle" id="red"></div>
+        <div class="quarter-circle" id="yellow">   </div>
+        <div class="quarter-circle" id="blue"></div>
 
         <div id="cutout">
-           <p class="title">SIMON</p>
+           <p id="title">SIMON</p>
            <div class="buttons">
-               <button type="button" class="btn-sm" id="cancel" onclick="cancelGuess()">CANCEL</button>
+               <button type="button" class="btn-sm" id="cancel">CANCEL</button>
                 <button type="button" class="btn-lg" id="start-button">START</button>
                 <button type="button" class="btn-sm" id="accept">ACCEPT</button>
            </div>
-            <div id="counter">Press START to play!</div>
+            <div id="screen">Press START to play</div>
         </div>        
     </div>
 </body>

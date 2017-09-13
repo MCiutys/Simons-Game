@@ -28,12 +28,16 @@
     // Other const variables
     const SCORE_TEXT = "Score ";
     const GUESS_TEXT = "Guess ";
+    const LEVEL_TEXT = "Level: ";
     
     // Audio files
     const AUDIO_GREEN = new Audio('green.wav');
     const AUDIO_RED= new Audio('red.wav');
     const AUDIO_BLUE = new Audio('blue.wav');
     const AUDIO_YELLOW = new Audio('yellow.wav');
+    const AUDIO_GAME_OVER = new Audio('game_over.wav');
+    const AUDIO_ACCEPT = new Audio('accept.wav');
+    const AUDIO_CANCEL = new Audio('cancel.wav');
     
     // Levels and speed
     const SHOW_COLOR = 1000;
@@ -46,6 +50,7 @@
         this.level = 1;
         this.accepted = false;
         this.gameStarted = false;
+        this.showingSequence = false;
     }
     
     // Function where all the logic is placed
@@ -63,7 +68,6 @@
                     mainLoop();
                 });
             } else {
-                console.log("Game is done");
             }
         }
         
@@ -72,15 +76,20 @@
     
     // Function for starting the game
     Simon.prototype.startGame = function() {
+        
+        this.buttonFlash("start-button");
+        
         // Reset variables
         this.guess = "";
         this.currentSequence = "";
         this.result = 0;
         this.gameStarted = true;
+        this.level = 1;
+        this.showingSequence = false;
         
-        document.getElementById("counter").style.textOverflow = "ellipsis";
-        document.getElementById("counter").style.overflow = "hidden";
-        document.getElementById("counter").style.whiteSpace = "nowrap";
+        document.getElementById("screen").style.textOverflow = "ellipsis";
+        document.getElementById("screen").style.overflow = "hidden";
+        document.getElementById("screen").style.whiteSpace = "nowrap";
         
     };
     
@@ -108,6 +117,31 @@
         }
     };
     
+    // Flash all black borders
+    Simon.prototype.flashWhite = function() {
+        if (!this.showingSequence) {
+            var elements = document.querySelectorAll(".black-border");
+            for (var i = 0; i < elements.length; i++) {
+                var element = elements[i].id;
+                document.getElementById(element).style.borderColor = WHITE;
+            }      
+        }
+    };
+    
+    // Flashes the given button
+    Simon.prototype.buttonFlash = function(button) {
+        if (!this.showingSequence || button === "start-button") {
+            document.getElementById(button).style.color = WHITE;
+            document.getElementById(button).style.borderColor = WHITE;
+        }
+    };
+    
+    // Return previous color for a given button
+    Simon.prototype.buttonBack = function(button) {
+            document.getElementById(button).style.color = BLACK;
+            document.getElementById(button).style.borderColor = BLACK;
+    };
+    
     function setColor(place, color) {
         var x = document.getElementById(place);
         x.style.backgroundColor = color;
@@ -131,13 +165,7 @@
         }
     }
     
-    function flashWhite() {
-        var elements = document.querySelectorAll(".black-border");
-        for (var i = 0; i < elements.length; i++) {
-            var element = elements[i].id;
-            document.getElementById(element).style.borderColor = WHITE;
-        }      
-    }
+    
     
     function backBlack() {
         var elements = document.getElementsByClassName("black-border");
@@ -147,65 +175,98 @@
         } 
     }
     
-    function mouseDown(place) {
-        document.getElementById(place).style.backgroundColor = BLACK;
-        flashWhite();
-    }
+    Simon.prototype.mouseDown = function(place) {
+        if (!this.showingSequence) {
+            document.getElementById(place).style.backgroundColor = BLACK;
+            this.flashWhite();
+        }
+    };
     
-    function mouseUp(place) {
-        backBlack();
-        switch(place) {
-            case 'green': 
-                document.getElementById(place).style.backgroundColor = LIGHT_GREEN;
-                break;
-            case 'red':
-                document.getElementById(place).style.backgroundColor = LIGHT_RED;
-                break;
-            case 'blue':
-                document.getElementById(place).style.backgroundColor = LIGHT_BLUE;
-                break;
-            case 'yellow':
-                document.getElementById(place).style.backgroundColor = LIGHT_YELLOW;
-                break;
-        }        
-    }
+    Simon.prototype.mouseUp = function(place) {
+        if (!this.showingSequence) {
+            backBlack();
+            switch(place) {
+                case 'green': 
+                    document.getElementById(place).style.backgroundColor = LIGHT_GREEN;
+                    break;
+                case 'red':
+                    document.getElementById(place).style.backgroundColor = LIGHT_RED;
+                    break;
+                case 'blue':
+                    document.getElementById(place).style.backgroundColor = LIGHT_BLUE;
+                    break;
+                case 'yellow':
+                    document.getElementById(place).style.backgroundColor = LIGHT_YELLOW;
+                    break;
+            }        
+        }
+    };
     
     function gameOver(self) {
-        document.getElementById("counter").innerHTML = "Game Over" + "<br>" + "Score " + 
-                    (self.result - 1);
+        AUDIO_GAME_OVER.play();
+        document.getElementById("screen").innerHTML = "Game Over" + "<br>" + "Score " + 
+                    self.result;
     }
     
-    
-    Simon.prototype.lightGreen = function() {
-        document.getElementById("green").style.backgroundColor = LIGHT_GREEN;
+    Simon.prototype.hoveringOver = function(color) {
+        if (!this.showingSequence) {
+            switch(color) {
+                case RED:
+                    document.getElementById("red").style.backgroundColor = LIGHT_RED;
+                    break;
+                case GREEN:
+                    document.getElementById("green").style.backgroundColor = LIGHT_GREEN;
+                    break;
+                case BLUE:
+                    document.getElementById("blue").style.backgroundColor = LIGHT_BLUE;
+                    break;
+                case YELLOW:
+                    document.getElementById("yellow").style.backgroundColor = LIGHT_YELLOW;
+                    break;
+            } 
+        }
     };
     
-    Simon.prototype.darkGreen = function() {
-        document.getElementById("green").style.backgroundColor = DARK_GREEN;
+    Simon.prototype.afterHovering = function(color) {
+        if (!this.showingSequence) {
+            switch(color) {
+                case RED:
+                    document.getElementById("red").style.backgroundColor = DARK_RED;
+                    break;
+                case GREEN:
+                    document.getElementById("green").style.backgroundColor = DARK_GREEN;
+                    break;
+                case BLUE:
+                    document.getElementById("blue").style.backgroundColor = DARK_BLUE;
+                    break;
+                case YELLOW:
+                    document.getElementById("yellow").style.backgroundColor = DARK_YELLOW;
+                    break;
+            }
+        }
     };
     
-    Simon.prototype.lightRed = function() {
-        document.getElementById("red").style.backgroundColor = LIGHT_RED;
-    };
-    
-    Simon.prototype.darkRed = function() {
-        document.getElementById("red").style.backgroundColor = DARK_RED;
-    };
-    
-    Simon.prototype.lightBlue = function() {
-        document.getElementById("blue").style.backgroundColor = LIGHT_BLUE;
-    };
-    
-    Simon.prototype.darkBlue = function() {
-        document.getElementById("blue").style.backgroundColor = DARK_BLUE;
-    };
-    
-    Simon.prototype.lightYellow = function() {
-        document.getElementById("yellow").style.backgroundColor = LIGHT_YELLOW;
-    };
-    
-    Simon.prototype.darkYellow = function() {
-        document.getElementById("yellow").style.backgroundColor = DARK_YELLOW;
+    Simon.prototype.pressColor = function(color) {
+        if (!this.showingSequence) {
+            switch(color) {
+                case RED:
+                    AUDIO_RED.play();
+                    this.guess += RED;
+                    break;
+                case GREEN:
+                    AUDIO_GREEN.play();
+                    this.guess += GREEN;
+                    break;
+                case BLUE:
+                    AUDIO_BLUE.play();
+                    this.guess += BLUE;
+                    break;
+                case YELLOW:
+                    AUDIO_YELLOW.play();
+                    this.guess += YELLOW;
+                    break;
+            }
+        }
     };
     
     Simon.prototype.pressGreen = function() {
@@ -231,13 +292,14 @@
     Simon.prototype.cancelGuess = function() {
         if (this.gameStarted) {
             this.guess = this.guess.substring(0, this.guess.length - 1);
-            console.log(this.guess);
+            AUDIO_CANCEL.play();
         }
     };
     
     Simon.prototype.acceptGuess = function() {
         if (this.gameStarted) {
             this.accepted = true;
+            AUDIO_ACCEPT.play();
         }
     };
 
@@ -245,9 +307,17 @@
     Simon.prototype.showSequence = function() {
         var self = this;
         var counter = 0;
+                
         show();
         
         function show() {
+            self.showingSequence = true;
+            
+            // If true, buttons can be clickable
+            if (counter === self.currentSequence.length) {
+                self.showingSequence = false;
+            }
+            
             if (counter < self.currentSequence.length) {
                 var place = "";
                 var colorToSet = "";
@@ -269,6 +339,7 @@
                     colorToSet = LIGHT_YELLOW;
                     colorToSetBack = DARK_YELLOW;
                 }
+                
                 setColor(place, colorToSet);
                 playSound(place).play();
                 setTimeout(function() {
@@ -276,9 +347,21 @@
                 }, SHOW_COLOR / self.level);
                 
                 counter++;
-                setTimeout(show, CHANGE_COLOR / self.level);
+                
+                var delayTime = CHANGE_COLOR / self.level;
+                if (counter === self.currentSequence.length) {
+                    delayTime = SHOW_COLOR / self.level;
+                }
+                
+                
+                setTimeout(function() {
+                    show();
+                }, delayTime);  
             }
+            
         }
+        
+        
     };
 
     // Function to get the guess from a user
@@ -287,11 +370,11 @@
         loop();
        
        function loop() {
-           document.getElementById("counter").innerHTML = SCORE_TEXT +
-                    (g.result - 1) + '<br>' + GUESS_TEXT + g.guess;
+           document.getElementById("screen").innerHTML = SCORE_TEXT +
+                    g.result + "," + LEVEL_TEXT + g.level + '<br>' + GUESS_TEXT + g.guess;
             if (g.accepted === true) {
                 g.accepted = false;
-                setTimeout(callback, 2000);
+                setTimeout(callback, 0);
             } else {
                 setTimeout(loop, 0);
             }
@@ -302,18 +385,20 @@
     Simon.prototype.isMatching = function() {
         var match = false;
         if (this.guess === this.currentSequence) {
-            this.result++;
+            // Do not increase result when both are empty at the start
+            if (this.guess.length !== 0) {
+                this.result++;
+            }
             match = true;
         } else {
             gameOver(this);
         }
         this.guess = "";
         
-        // Increase level if needed
-        if (this.result % 5 === 0) {
+    // Increase level if needed
+        if (this.result % 3 === 0 && this.result > 0) {
             this.level++;
         }
-        
         return match;
     };
 
