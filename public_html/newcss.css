@@ -8,26 +8,76 @@ and open the template in the editor.
     Author     : Mantas
 */
 
+
+html {
+    width: 100%;
+    height: 100%;
+}
+
+body {
+    width: 100%;
+    height: 100%;
+}
+
 /* Basis for the game, the circle */
 #main-circle {
-    width: 600px;
-    height: 600px;
-    -webkit-border-radius: 300px;
-    -moz-border-radius: 300px;
-    border-radius: 300px;
+    /*width: 43.9238653%;*/
+    /*height: 91.047040971%;*/
+    width: 43.9238653vw;
+    height: 43.9238653vw;
+    -webkit-border-radius: 100%;
+    -moz-border-radius: 100%;
+    border-radius: 100%;
     background: rgb(155, 155, 155);
     margin: auto;
     position: relative;
-    top: 30px;
+    top: 10%;
 }
 
-/* Black border, used for buttons, quarter circles */
+ #sound {
+     width: 12vw;
+     height: 3vw;
+     position: absolute;
+     left: 20%;
+     top: 0%;
+     font-size: 1.5vw;
+ }
+ 
+ .text {
+    position: relative;
+    top: 50%;
+    transform: translateY(-50%);
+    text-align: center;
+ }
+ 
+ #sound_on_off_text {
+    position: relative;
+    top: 50%;
+    transform: translateY(-50%);
+    text-align: center;
+ }
+ 
+ #sound_text {
+     display: inline-block;
+     width: 65%;
+     height: 100%;
+ }
+ 
+ #sound_on_off {
+     display: inline-block;
+     width: 30%;
+     height: 100%;
+     background: green;
+ }
+
+ /*Black border, used for buttons, quarter circles*/ 
 .black-border {
     border: solid;
     border-color: black;
+    border-width: 0.25em;
 }
 
-/* Class that represents the quarter of a circle */
+ /*Class that represents the quarter of a circle*/ 
 .quarter-circle {
     position: absolute;
     width:40%;
@@ -35,37 +85,37 @@ and open the template in the editor.
     transition:background-color 0.2s ease-in-out;
 }
 
-/* Green quarter */
+ /*Green quarter*/ 
 #green {
-    top: 30px;
-    left: 30px;
-    background-color:rgb(0, 51, 0);
+    top: 2.14285714286em;
+    left: 2.14285714286em;
+    background-color: rgb(0, 51, 0);
     border-radius:100% 0 0 0;
     cursor: pointer; 
 }
 
-/* Red quarter */
+ /*Red quarter*/ 
 #red {
-    top: 30px;
-    right: 30px;
+    top: 2.14285714286em;
+    right: 2.14285714286em;
     background-color:rgb(204, 0, 0);
     border-radius:0 100% 0 0 ;
     cursor: pointer;
 }
 
-/* Yellow quarter */
+ /*Yellow quarter*/ 
 #yellow {
-    bottom: 30px;
-    left:30px; 
+    bottom: 2.14285714286em;
+    left:2.14285714286em; 
     background-color:rgb(255, 204, 0);
     border-radius:0 0 0 100%;
     cursor: pointer;
 }
 
-/* Blue quarter */
+ /*Blue quarter*/ 
 #blue {
-    bottom:30px;
-    right:30px;
+    bottom:2.14285714286em;
+    right:2.14285714286em;
     background-color:rgb(0, 0, 102);
     border-radius:0 0 100% 0 ;
     cursor: pointer;
@@ -74,79 +124,82 @@ and open the template in the editor.
 /* Cutout represents the center part, where buttons, title and screen
 are displayed */
 #cutout {
-    width:53.3%;
-    height:50%;
+    width: 53.333333333%;
+    height: 50%;
     margin: auto;
-    border-radius:150px;
-    /*border-width: 10px;*/
+    border-radius:100%;
     position: relative;
-    top: 300px;
+    top: 21.4285714286vw;
     transform: translateY(-50%);
     background: rgb(155, 155, 155);
-    padding-top: 30px;
+    padding-top: 5%;
 }
 
-/* Title basically shows the title of the game (which, obviously, is Simon) */
+ /*Title basically shows the title of the game (which, obviously, is Simon)*/ 
 #title {
     position: relative;
-    bottom: 25px;
+    bottom: 0.4em;
     width: 62.5%;
     font-family: Sans Serif;
     color: black;
-    font-size: 58px;
+    font-size: 4.14285714286vw;
     font-weight: bold;
     text-align: center;
     margin: auto;
 }
 
-/* Start button - used to start the game */
+ /*Start button - used to start the game*/ 
 #start-button {
     background-color: yellow;
     color: black;
-    border-radius: 50%;
+    border-radius: 30%;
     font-weight: bold;
     margin: auto;
+    width: 35%;
+    max-width: 100%;
+    font-size: 1.3vw;
 }
 
-/* Cancel button - used to cancel one letter from the string given by the player */
+ /*Cancel button - used to cancel one letter from the string given by the player*/ 
 #cancel {
     background-color: red;
     color: black;
     border-radius: 30%;
     font-weight: bold;
     margin: auto;
-
+    width: 30%;
+    font-size: 1vw;
 }
 
-/* Accept button - used to accept the final string from the player */
+ /*Accept button - used to accept the final string from the player*/ 
 #accept {
     background-color: green;
     color: black;
     border-radius: 30%;
     font-weight: bold;
     margin: auto;
-
+    width: 30%;
+    font-size: 1vw;
 }
 
-/* Class common for all the buttons */
+ /*Class common for all the buttons*/ 
 .buttons {
     text-align: center;
-    padding-top: 5px;
+    padding-top: 1.5625%;
     width: 90%;
     margin: auto;
     position: relative;
-    bottom: 40px;
+    bottom: 2.5vw;
 }
 
-/* Represents screen of the game where all the information is displayed */
+ /*Represents screen of the game where all the information is displayed*/ 
 #screen {
     position: relative;
-    bottom: 40px;
-    width: 75%;
+    bottom: 2em;
+    width: 70%;
     height: 40%;
     background-color: white;
-    font-size: 20px;
-/*    font-family: 'Segment7Standard'; */
+    font-size: 1.5vw;
     font-family: 'Courier';
     font-weight: bold; 
     font-style: italic;
@@ -155,5 +208,4 @@ are displayed */
     vertical-align: middle;
     margin: auto;
     margin-top: 5%;
-    direction: rtl;
 }

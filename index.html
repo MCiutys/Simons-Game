@@ -7,21 +7,27 @@ and open the template in the editor.
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
     <head>
-        <link rel="stylesheet" href="newcss.css" type="text/css"/>
-        <link rel="stylesheet" href="css/bootstrap.min.css" type="text/css"/>
-        <link rel="stylesheet" media="screen" href="https://fontlibrary.org/face/segment7" type="text/css"/>
-        <script type="text/javascript" src="js/jquery-3.2.1.js"></script>
-        <script type="text/javascript" src="newjavascript.js"></script>
+        <link rel="stylesheet" href="public_html/newcss.css" type="text/css"/>
+        <link rel="stylesheet" href="public_html/css/bootstrap.min.css" type="text/css"/>
+        <script type="text/javascript" src="public_html/js/jquery-3.2.1.js"></script>
+        <script type="text/javascript" src="public_html/newjavascript.js"></script>
         
         
         <script type="text/javascript">
             $(document).ready(function(){
+                
+                var width = $("#main-circle").width();
+                $("#main-circle").css({'height:':width+'px'});
 
                 var simon = new Simon();
                 
                 $("#start-button").mousedown(function() {
                     simon.buttonFlash("start-button");
                     simon.executeGame();
+                });
+                
+                $("#sound_on_off").click(function() {
+                    simon.changeSound();
                 });
                 
                 $("#start-button").mouseup(function() {
@@ -129,25 +135,31 @@ and open the template in the editor.
         <title>Simon's Game</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        
     </head>
     
-    <body style="background-color:#FFFFFF">
-    <div id="main-circle">
-        <div class="quarter-circle" id="green"></div>
-        <div class="quarter-circle" id="red"></div>
-        <div class="quarter-circle" id="yellow">   </div>
-        <div class="quarter-circle" id="blue"></div>
+    
+    <body>
+        <div id="main-circle">
+            <div class="quarter-circle" id="green"></div>
+            <div class="quarter-circle" id="red"></div>
+            <div class="quarter-circle" id="yellow">   </div>
+            <div class="quarter-circle" id="blue"></div>
 
-        <div id="cutout">
-           <p id="title">SIMON</p>
-           <div class="buttons">
-               <button type="button" class="btn-sm" id="cancel">CANCEL</button>
-                <button type="button" class="btn-lg" id="start-button">START</button>
-                <button type="button" class="btn-sm" id="accept">ACCEPT</button>
-           </div>
-            <div id="screen">Press START to play</div>
-        </div>        
-    </div>
-</body>
+            <div id="cutout">
+               <p id="title">SIMON</p>
+               <div class="buttons">
+                   <button type="button" class="btn-sm" id="cancel">CANCEL</button>
+                    <button type="button" class="btn-lg" id="start-button">START</button>
+                    <button type="button" class="btn-sm" id="accept">ACCEPT</button>
+               </div>
+                <div id="screen">Press START to play</div>
+            </div>        
+        </div>
+        <div id="sound">
+            <div id="sound_text"> <p class="text"> Sound </p> </div>
+            <div id="sound_on_off"> <div id="sound_on_off_text"> ON </div> </div>
+        </div>
+    </body>
 </html>
 

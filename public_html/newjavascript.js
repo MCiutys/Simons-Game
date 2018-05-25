@@ -10,6 +10,12 @@
     const GREEN = 'G';
     const YELLOW = 'Y';
     
+    // Final variables for sound
+    const OFF = "OFF";
+    const ON = "ON";
+    const OFF_COLOUR = "red";
+    const ON_COLOUR = "green";
+    
     // Final variables for colours
     const DARK_GREEN = "rgb(0, 51, 0)";
     const DARK_RED = "rgb(204, 0, 0)";
@@ -31,13 +37,13 @@
     const LEVEL_TEXT = "Level: ";
     
     // Audio files
-    const AUDIO_GREEN = new Audio('green.wav');
-    const AUDIO_RED= new Audio('red.wav');
-    const AUDIO_BLUE = new Audio('blue.wav');
-    const AUDIO_YELLOW = new Audio('yellow.wav');
-    const AUDIO_GAME_OVER = new Audio('game_over.wav');
-    const AUDIO_ACCEPT = new Audio('accept.wav');
-    const AUDIO_CANCEL = new Audio('cancel.wav');
+    const AUDIO_GREEN = new Audio('public_html/green.wav');
+    const AUDIO_RED= new Audio('public_html/red.wav');
+    const AUDIO_BLUE = new Audio('public_html/blue.wav');
+    const AUDIO_YELLOW = new Audio('public_html/yellow.wav');
+    const AUDIO_GAME_OVER = new Audio('public_html/game_over.wav');
+    const AUDIO_ACCEPT = new Audio('public_html/accept.wav');
+    const AUDIO_CANCEL = new Audio('public_html/cancel.wav');
     
     // Levels and speed
     const SHOW_COLOR = 1000;
@@ -51,6 +57,7 @@
         this.accepted = false;
         this.gameStarted = false;
         this.showingSequence = false;
+        this.soundOn = true;
     }
     
     // Function where all the logic is placed
@@ -67,11 +74,21 @@
                 self.getGuess(function() {
                     mainLoop();
                 });
-            } else {
             }
         }
         
         this.stopGame();
+    };
+    
+    Simon.prototype.changeSound = function() {
+        if (this.soundOn) {
+            document.getElementById("sound_on_off").style.backgroundColor = OFF_COLOUR;
+            document.getElementById("sound_on_off_text").innerHTML = OFF;
+        } else {
+            document.getElementById("sound_on_off").style.backgroundColor = ON_COLOUR;
+            document.getElementById("sound_on_off_text").innerHTML = ON;
+        }
+        this.soundOn = !this.soundOn;        
     };
     
     // Function for starting the game
@@ -202,11 +219,13 @@
         }
     };
     
-    function gameOver(self) {
-        AUDIO_GAME_OVER.play();
+    Simon.prototype.gameOver = function() {
+        if (this.soundOn) {
+            AUDIO_GAME_OVER.play();
+        }
         document.getElementById("screen").innerHTML = "Game Over" + "<br>" + "Score " + 
-                    self.result;
-    }
+                    this.result;
+    };
     
     Simon.prototype.hoveringOver = function(color) {
         if (!this.showingSequence) {
@@ -248,58 +267,72 @@
     
     Simon.prototype.pressColor = function(color) {
         if (!this.showingSequence) {
+            
+            var sound = new Audio();
+            
             switch(color) {
                 case RED:
-                    AUDIO_RED.play();
+//                    AUDIO_RED.play();
+                    sound = AUDIO_RED;
                     this.guess += RED;
                     break;
                 case GREEN:
-                    AUDIO_GREEN.play();
+//                    AUDIO_GREEN.play();
+                    sound = AUDIO_GREEN;
                     this.guess += GREEN;
                     break;
                 case BLUE:
-                    AUDIO_BLUE.play();
+//                    AUDIO_BLUE.play();
+                    sound = AUDIO_BLUE;
                     this.guess += BLUE;
                     break;
                 case YELLOW:
-                    AUDIO_YELLOW.play();
+//                    AUDIO_YELLOW.play();
+                    sound = AUDIO_YELLOW;
                     this.guess += YELLOW;
                     break;
+            }
+            if (this.soundOn) {
+                sound.play();
             }
         }
     };
     
-    Simon.prototype.pressGreen = function() {
-        AUDIO_GREEN.play();
-        this.guess += GREEN;
-    };
-    
-    Simon.prototype.pressRed = function() {
-        AUDIO_RED.play();
-        this.guess += RED;
-    };
-    
-    Simon.prototype.pressBlue = function() {
-        AUDIO_BLUE.play();
-        this.guess += BLUE;
-    };
-    
-    Simon.prototype.pressYellow = function() {
-        AUDIO_YELLOW.play();
-        this.guess += YELLOW;
-    };
+//    Simon.prototype.pressGreen = function() {
+//        AUDIO_GREEN.play();
+//        this.guess += GREEN;
+//    };
+//    
+//    Simon.prototype.pressRed = function() {
+//        AUDIO_RED.play();
+//        this.guess += RED;
+//    };
+//    
+//    Simon.prototype.pressBlue = function() {
+//        AUDIO_BLUE.play();
+//        this.guess += BLUE;
+//    };
+//    
+//    Simon.prototype.pressYellow = function() {
+//        AUDIO_YELLOW.play();
+//        this.guess += YELLOW;
+//    };
     
     Simon.prototype.cancelGuess = function() {
         if (this.gameStarted) {
             this.guess = this.guess.substring(0, this.guess.length - 1);
-            AUDIO_CANCEL.play();
+            if (this.soundOn) {
+                AUDIO_CANCEL.play();
+            }
         }
     };
     
     Simon.prototype.acceptGuess = function() {
         if (this.gameStarted) {
             this.accepted = true;
-            AUDIO_ACCEPT.play();
+            if (this.soundOn) {
+                AUDIO_ACCEPT.play();
+            }
         }
     };
 
@@ -341,7 +374,9 @@
                 }
                 
                 setColor(place, colorToSet);
-                playSound(place).play();
+                if (self.soundOn) {
+                    playSound(place).play();
+                }
                 setTimeout(function() {
                     setColorBack(place, colorToSetBack);
                 }, SHOW_COLOR / self.level);
@@ -371,7 +406,7 @@
        
        function loop() {
            document.getElementById("screen").innerHTML = SCORE_TEXT +
-                    g.result + "," + LEVEL_TEXT + g.level + '<br>' + GUESS_TEXT + g.guess;
+                    g.result + '<br>' + LEVEL_TEXT + g.level + '<br>' + GUESS_TEXT + g.guess;
             if (g.accepted === true) {
                 g.accepted = false;
                 setTimeout(callback, 0);
@@ -391,7 +426,7 @@
             }
             match = true;
         } else {
-            gameOver(this);
+            this.gameOver();
         }
         this.guess = "";
         
